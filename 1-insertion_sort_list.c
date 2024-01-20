@@ -7,7 +7,7 @@
 */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *p, *n;
+	listint_t *p;
 	listint_t *nex = *list;
 	listint_t *pre = *list;
 	listint_t *ref = *list;
