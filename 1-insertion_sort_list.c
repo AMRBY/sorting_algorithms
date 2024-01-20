@@ -10,14 +10,11 @@ void insertion_sort_list(listint_t **list)
 	listint_t *p;
 	listint_t *nex = *list;
 	listint_t *pre = *list;
-	listint_t *ref = *list;
-
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 	nex = nex->next;
-	ref = ref->next;
-	while (ref != NULL)
+	while (nex != NULL)
 	{
 		while (pre != NULL)
 		{
@@ -37,11 +34,10 @@ void insertion_sort_list(listint_t **list)
 				if (p == NULL)
 					*list = nex;
 				print_list(*list);
-			}
+}
 			pre = p;
 		}
-		ref = ref->next;
-		nex = ref;
+		nex = nex->next;
 		if (nex)
 			pre = nex->prev;
 	}
