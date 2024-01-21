@@ -1,66 +1,39 @@
 #include "sort.h"
-
 /**
- * swap_nodes - swaps two nodes in a doubly linked list
- * @list: doubly-linked list
- * @curr: node currently indexed
- * @prev: node before curr
-*/
-void swap_nodes(listint_t **list, listint_t *curr, listint_t *prev)
-{
-	listint_t *temp;
-
-	if (prev->prev != NULL)
-		prev->prev->next = curr;
-	if (curr->next != NULL)
-		curr->next->prev = prev;
-
-	temp = prev->prev;
-	prev->prev = curr;
-	prev->next = curr->next;
-	curr->prev = temp;
-	curr->next = prev;
-	if (temp == NULL)
-		*list = curr;
-
-}
-/**
- * insertion_sort_list - sorts a linked list using insertion sort algorithm
- * @list: double pointer to a linked list
+* insertion_sort - sorting array
+* Description: it's a bubble sort
+* @list: listint_t
+* return: list
 */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *curr;
-	listint_t *prev;
-	int i = 0;
-	listint_t *stop;
+	listint_t *p;
+	listint_t *nex;
+	listint_t *pre;
 
-	/*case when the list is empty or has one node*/
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
-	prev = *list;
-	curr = (*list)->next;
-	while (curr != NULL)
+	nex = (*list)->next;
+	pre = *list;
+	while (nex != NULL)
 	{
-		i = 0; /*tracks position of first swap in each iteration*/
-		stop = curr;
-swap:
-		if (prev != NULL && curr->n < prev->n)
+		pre = nex->prev;
+		while (pre != NULL && nex->n < pre->n)
 		{
-			swap_nodes(list, curr, prev);
+			p = pre->prev;
+			if (pre->prev != NULL)
+				pre->prev->next = nex;
+			if (nex->next != NULL)
+				nex->next->prev = pre;
+			pre->prev = nex;
+			pre->next = nex->next;
+			nex->prev = p;
+			nex->next = pre;
+			if (p == NULL)
+				*list = nex;
 			print_list(*list);
-			++i;
-			if (i == 1)
-				stop = prev;
+			pre = p;
 		}
-		else
-		{
-			curr = stop->next;
-			if (curr != NULL)
-				prev = curr->prev;
-			continue;
-		}
-		prev = curr->prev;
-		goto swap;
+		nex = nex->next;
 	}
 }
