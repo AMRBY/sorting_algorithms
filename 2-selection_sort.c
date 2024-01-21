@@ -1,66 +1,34 @@
 #include "sort.h"
-
 /**
- * swap_nodes - swaps two nodes in a doubly linked list
- * @list: doubly-linked list
- * @curr: node currently indexed
- * @prev: node before curr
+* selection_sort - sorting array
+* Description: it's a selection sort
+* @array: listint_t
+* @size: size
+* return: list
 */
-void swap_nodes(listint_t **list, listint_t *curr, listint_t *prev)
+void selection_sort(int *array, size_t size)
 {
-	listint_t *temp;
+	size_t i, j, tmp;
+	int low;
 
-	if (prev->prev != NULL)
-		prev->prev->next = curr;
-	if (curr->next != NULL)
-		curr->next->prev = prev;
-
-	temp = prev->prev;
-	prev->prev = curr;
-	prev->next = curr->next;
-	curr->prev = temp;
-	curr->next = prev;
-	if (temp == NULL)
-		*list = curr;
-
-}
-/**
- * insertion_sort_list - sorts a linked list using insertion sort algorithm
- * @list: double pointer to a linked list
-*/
-void insertion_sort_list(listint_t **list)
-{
-	listint_t *curr;
-	listint_t *prev;
-	int i = 0;
-	listint_t *stop;
-
-	/*case when the list is empty or has one node*/
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
+	if (array == NULL || size < 2)
 		return;
-	prev = *list;
-	curr = (*list)->next;
-	while (curr != NULL)
+	for (j = 0; j < size - 1; j++)
 	{
-		i = 0; /*tracks position of first swap in each iteration*/
-		stop = curr;
-swap:
-		if (prev != NULL && curr->n < prev->n)
+		low = array[j];
+		for (i = j + 1; i < size; i++)
 		{
-			swap_nodes(list, curr, prev);
-			print_list(*list);
-			++i;
-			if (i == 1)
-				stop = prev;
+			if (array[i] < low)
+			{
+				low = array[i];
+				tmp = i;
+			}
 		}
-		else
+		if (low != array[j])
 		{
-			curr = stop->next;
-			if (curr != NULL)
-				prev = curr->prev;
-			continue;
+			array[tmp] = array[j];
+			array[j] = low;
+			print_array(array, size);
 		}
-		prev = curr->prev;
-		goto swap;
 	}
 }
