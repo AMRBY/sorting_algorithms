@@ -8,10 +8,10 @@
 */
 void selection_sort(int *array, size_t size)
 {
-	int tmp, low;
-	size_t i, j;
+	size_t i, j, tmp;
+	int low;
 
-	for (j = 0; j < size; j++)
+	for (j = 0; j < size - 1; j++)
 	{
 		low = array[j];
 		for (i = j + 1; i < size; i++)
@@ -21,11 +21,12 @@ void selection_sort(int *array, size_t size)
 				low = array[i];
 				tmp = i;
 			}
-			else
-				continue;
 		}
-		array[tmp] = array[j];
-		array[j] = low;
-		print_array(array, size);
+		if (low != array[j])
+		{
+			array[tmp] = array[j];
+			array[j] = low;
+			print_array(array, size);
+		}
 	}
 }
