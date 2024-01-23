@@ -8,11 +8,12 @@
 * @piv: pivot
 * return: array
 */
-size_t first(int *array, size_t size, size_t i, size_t piv)
+size_t first(int *array, size_t size, size_t k, size_t piv)
 {
-	size_t j, tmp;
+	size_t j, i, tmp;
 
-		j = i;
+		j = k;
+		i = k;
 		while (j < piv)
 		{
 			if (array[j] < array[piv])
@@ -47,14 +48,14 @@ size_t first(int *array, size_t size, size_t i, size_t piv)
 * @piv: pivot
 * return: array
 */
-void second(int *array, size_t size, size_t i, size_t piv)
+void second(int *array, size_t size, size_t k, size_t piv)
 {
 	size_t h;
 
-	if (piv > i)
+	if (piv > k)
 	{
-		h = first(array, size, i, piv);
-		second(array, size, i, h - 1);
+		h = first(array, size, k, piv);
+		second(array, size, k, h - 1);
 		second(array, size, h + 1, piv);
 	}
 
@@ -68,10 +69,10 @@ void second(int *array, size_t size, size_t i, size_t piv)
 */
 void quick_sort(int *array, size_t size)
 {
-	size_t i = 0, piv = size - 1;
+	size_t k = 0, piv = size - 1;
 
 	if (array == NULL || size < 2)
 		return;
 
-	second(array, size, i, piv);
+	second(array, size, k, piv);
 }
