@@ -54,7 +54,7 @@ void second(int *array, size_t size, size_t i, size_t piv)
 	if (piv > i)
 	{
 		h = first(array, size, i, piv);
-		second(array, size, 0, h - 1);
+		second(array, size, i, h - 1);
 		second(array, size, h + 1, piv);
 	}
 
