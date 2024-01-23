@@ -69,7 +69,7 @@ void second(int *array, size_t size, size_t i, size_t piv)
 */
 void quick_sort(int *array, size_t size)
 {
-	size_t i = 0, j = 0, piv = size - 1;
+	size_t i = 0, piv = size - 1;
 
 	if (array == NULL || size < 2)
 		return;
