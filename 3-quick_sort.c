@@ -13,7 +13,6 @@ size_t first(int *array, size_t size, size_t i, size_t piv)
 	size_t j, tmp;
 
 		j = i;
-		printf("first:%i,%i--%i\n", array[piv], array[j], array[piv]);
 		while (j < piv)
 		{
 			if (array[j] < array[piv])
